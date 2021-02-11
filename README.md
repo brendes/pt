@@ -19,7 +19,17 @@ go get github.com/hoffa/pt
 ## Usage
 
 ```shell
-pt -base-url https://my.site *.md
+Usage of pt:
+  -base-url string
+    	base URL
+  -feed string
+    	feed target (default "feed.xml")
+  -feed-template string
+    	feed template (default "templates/feed.xml")
+  -highlight string
+    	code highlight style
+  -template string
+    	page template (default "templates/page.html")
 ```
 
 ## Front matter
@@ -47,7 +57,7 @@ First, get the page and RSS feed templates:
 
 ```shell
 curl -L https://github.com/hoffa/pt/archive/master.tar.gz \
-  | tar zxf- --strip-components=1 pt-master/templates
+  | tar -zxf- --strip-components=1 pt-master/templates
 ```
 
 Create the index page as `index.md`:
@@ -63,7 +73,7 @@ Subscribe via [RSS](/feed.xml).
 
 And a post within a file called `my-first-post.md`:
 
-```Markdown
+````Markdown
 ---
 title: My first post
 date: 2019-04-20
@@ -71,10 +81,17 @@ date: 2019-04-20
 
 This is an example **Markdown** _post_.
 I like `turtles`.
+
+```python
+print("Hello!")
 ```
+
+````
 
 Finally, build:
 
 ```shell
-pt *.md
+pt -base-url https://mysite.com -highlight monokailight *.md
 ```
+
+See the [Chroma Playground](https://swapoff.org/chroma/playground/) for available syntax highlighting styles.
